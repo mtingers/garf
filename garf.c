@@ -17,7 +17,7 @@
 #include <pthread.h>
 
 
-int httpd_listen(int s)
+inline int httpd_listen(int s)
 {
     int client;
     socklen_t ss;
@@ -30,7 +30,7 @@ int httpd_listen(int s)
     return client;
 }
 
-int httpd_recv(int sock_fd)
+inline int httpd_recv(int sock_fd)
 {
     ssize_t s = 0, total = 0;
     unsigned char buf[2048];
@@ -53,7 +53,7 @@ int httpd_recv(int sock_fd)
     return total;
 }
 
-ssize_t sock_send_all(int sock_fd, const void *buf, size_t len)
+inline ssize_t sock_send_all(int sock_fd, const void *buf, size_t len)
 {
     size_t sent = 0, s;
     do {
@@ -74,8 +74,8 @@ void *httpd_worker(void *noargs)
 {
     int i = 0, misses = 0;
     struct httpd_data *h;
-    char b1[] = "<br><div style='border:1px solid black;padding:1200px;margin:2000px'>a<br>b<br></div><h1>C</h1><br>";
-    char b2[] = "<p style='background:grey;font-size:120px;padding:1px;margin:1px'>1<br>2<br></p>";
+    char b1[] = "<br><div style='border:100000px solid black;padding:100000px;margin:100000px'>a<br>b<br></div><h1>C</h1><br>";
+    char b2[] = "<p style='background:grey;font-size:100000px;padding:1000000px;margin:100000px'>1<br>2<br></p>";
     char header[] = "<html><head><title>garf</title></head><body>";
     char OK_200[] = "HTTP/1.1 200 OK\r\nContent-type: text/html; charset=UTF-8\r\nServer: garf v1.0\r\n\r\n";
     /* char footer; -- no footer */
